@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+## Spotifyd API is available in the source file 
+## https://github.com/Spotifyd/spotifyd/blob/master/src/dbus_mpris.rs
+
+DIR="$HOME/.config/bspwm"
+rofi_cmd="rofi -theme $DIR/rofi/themes/spotify.rasi"
+
+button_music=''
+button_play=''
+button_pause=''
+button_next=''
+button_previous=''
+button_vol_up=''
+button_vol_down=''
+button_error=''
+
+# Colors
+active=""
+urgent=""
+
+# Gets the current status of mpd
+status="$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus')"
+shuffle_status="$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Shuffle')"
+
+# Defines the Play / Pause option content
+if [[ $status == *"Playing"* ]]; then
+	toggle="$button_pause"
+else
+	toggle="$button_play"
+fi
+
+# Variable passed to rofi
+options="$button_vol_up\n$button_vol_down\n$toggle\n$button_previous\n$button_next"
+
+# Get the current playing song
+current=$(dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'Metadata')
+artist=$(echo "$current" | sed -n '/albumArtist/{n; n; p}' | awk -F '"' '{print $2}') 
+title=$(echo "$current" | sed -n '/title/{n; p}' | awk -F '"' '{print $2}')
+# If spotifyd isn't running it will return an empty string, we don't want to display that
+if [[ $status == *"Playing"* ]]; then
+	result="${artist} - ${title}"
+else
+	result="No music playing"
+fi
+
+
+
+# Spawn menu
+# Using dbus rather than playerctl because it's hella faster
+chosen="$(echo -e "$options" | $rofi_cmd -p "$result" -dmenu $active $urgent -selected-row 2)"
+case $chosen in
+    $button_previous)
+        #playerctl previous
+        dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+        ;;
+    $toggle)
+        #playerctl play-pause
+        dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+        ;;
+    $button_next)
+        #playerctl next
+        dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+        ;;
+    $button_vol_up)
+      	dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.VolumeUp
+      	;;
+		$button_vol_down)
+      	dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotifyd /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.VolumeDown
+      	;;
+esac

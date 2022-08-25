@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+## Author  : Aditya Shakya (adi1090x)
+## Github  : @adi1090x
+#
+## Applets : Quick Links
+
+# Import Current Theme
+theme="$type/$style"
+DIR="$HOME/.config/bspwm"
+rofi_cmd="rofi -theme $DIR/rofi/themes/quicklinks.rasi"
+
+$BROWSER="firefox"
+
+# Options
+option_1=""
+option_2=""
+option_3=""
+option_4=""
+option_5=""
+option_6=""
+
+options="$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6"
+
+chosen="$(echo -e "$options" | $rofi_cmd -p "QuickLinks" -dmenu -selected-row 2)"
+case $chosen in
+    $option1)
+			xdg-open 'https://www.google.com/'
+        ;;
+    $option2)
+			xdg-open 'https://mail.proton.me/u/0/inbox'
+        ;;
+    $option3)
+			xdg-open 'https://www.youtube.com/'
+        ;;
+    $option4)
+			xdg-open 'https://www.github.com/'
+        ;;
+    $option5)
+			xdg-open 'https://www.reddit.com/'
+        ;;
+    $option6)
+			xdg-open 'https://www.twitter.com/'
+        ;;
+esac
