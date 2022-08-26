@@ -134,7 +134,7 @@ for i in ${settings[@]}; do
 
 ## Always Floating Apps
 declare -a floating=(alacritty-float Pcmanfm Thunar Onboard Yad 'Firefox:Places' \
-Viewnior feh Nm-connection-editor 'Proton VPN')
+Viewnior feh Nm-connection-editor Protonvpn)
 for i in ${floating[@]}; do
    bspc rule -a $i state=floating follow=on focus=on; done
 
