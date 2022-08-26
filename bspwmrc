@@ -141,6 +141,9 @@ for i in ${floating[@]}; do
 bspc rule -a Conky state=floating manage=off
 bspc rule -a stalonetray state=floating manage=off
 
+# Make PIP float and stay between workspaces
+bspc rule -a '*:*:Picture-in-Picture' state=floating sticky=on
+
 ## Autostart -------------------------------------------------#
 
 # Kill if already running
