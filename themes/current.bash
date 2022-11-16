@@ -2,33 +2,33 @@
 # Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
 # Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
 #
-# Pastel color scheme
+# Dracula color scheme
 # -----------------------------------------------------------------------------
 
 # Wallpaper
-wallpaper='/usr/share/backgrounds/pastel.png'
+wallpaper='/usr/share/backgrounds/dracula.png'
 
 # Special
-background='#222D57'
-foreground='#EBDDEB'
-cursor='#EBDDEB'
+foreground='#F8F8F2'
+background='#282A36'
+cursor='#F8F8F2'
 
 # Colors
-color0='#36416B'
-color1='#f0719b'
-color2='#5af7b0'
-color3='#ffa56b'
-color4='#57c7ff'
-color5='#c792ea'
-color6='#89ddff'
-color7='#eeffff'
-color8='#414B75'
-color9='#f02e6e'
-color10='#2ce592'
-color11='#ff8537'
-color12='#1da0e2'
-color13='#a742ea'
-color14='#47bae8'
-color15='#dee6e7'
+color0='#3C3E4A'
+color1='#FF5555'
+color2='#50FA7B'
+color3='#F1FA8C'
+color4='#BD93F9'
+color5='#FF79C6'
+color6='#8BE9FD'
+color7='#BFBFBF'
+color8='#4D4D4D'
+color9='#FF6E67'
+color10='#5AF78E'
+color11='#F4F99D'
+color12='#CAA9FA'
+color13='#FF92D0'
+color14='#9AEDFE'
+color15='#E6E6E6'
 
 # Don't Delete This File

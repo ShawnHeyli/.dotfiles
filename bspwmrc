@@ -114,7 +114,7 @@ for i in ${office[@]}; do
    bspc rule -a $i desktop='^5' follow=on focus=on; done
 
 ## 6 > communication (always open communication apps on workspace-6)
-declare -a comm=(Thunderbird TelegramDesktop Hexchat Discord Zoom)
+declare -a comm=(Thunderbird TelegramDesktop Hexchat discord Zoom)
 for i in ${comm[@]}; do
    bspc rule -a $i desktop='^6' follow=on focus=on; done
 
@@ -142,12 +142,12 @@ bspc rule -a Conky state=floating manage=off
 bspc rule -a stalonetray state=floating manage=off
 
 # Make PIP float and stay between workspaces
-bspc rule -a '*:*:Picture-in-Picture' state=floating sticky=on
+bspc rule -a '*:*:Picture in picture' state=floating sticky=on
 
 ## Autostart -------------------------------------------------#
 
 # Kill if already running
-killall -9 xsettingsd sxhkd dunst ksuperkey xfce4-power-manager blueman-applet polybar
+killall -9 xsettingsd sxhkd dunst ksuperkey xfce4-power-manager blueman-applet
 
 # Launch xsettingsd daemon
 #xsettings -c ~/.config/bspwm/xsettingsd &
@@ -175,12 +175,16 @@ xsetroot -cursor_name left_ptr
 feh --no-fehbg --bg-fill "$CURRENT_WALLPAPER"
 
 # Start mpd
-exec mpd &
+#exec mpd &
 
 # Start bluetooth
 exec blueman-applet &
 
-exec polybar -c ~/.config/bspwm/polybar/config.ini
+# Start color temp manager
+redshift -l 48.117268:-1.677793 -r -P &
+
+# Set keyboard layout
+setxkbmap -layout us -variant intl
 
 # Start bspwm scripts
 bspcolors
@@ -188,4 +192,3 @@ bspbar
 bspcomp
 bspdunst
 bspfloat &
-

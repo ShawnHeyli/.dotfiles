@@ -31,19 +31,23 @@ super + n
 ctrl + alt + t
 	sh ~/.config/bspwm/rofi/bin/themes
 
-# Rofi Menus/Applets
+r Rofi Menus/Applets
 super + {m,x,s,e,a}
-	sh ~/.config/bspwm/rofi/bin/{spotify,powermenu,screenshot,emoji,quicklinks}
+	sh ~/.config/bspwm/rofi/bin/{spotify,powermenu,screenshot,emoji,launcher}
 
 ##---------- Applications ----------##
 
 # Launch Apps
-super + shift + {w,d,s}
-	{firefox,discord,pavucontrol}
+super + shift + {t,w,d,p,s}
+	{thunar,firefox,discord,pavucontrol,spotify --force-device-scale-factor=1.5}
+
+# Toggle color temp (redshift)
+super + q 
+	pkill -USR1 redshift
 
 # Terminal Apps
-ctrl + alt + {v,r,h,s}
-	alacritty --config-file ~/.config/bspwm/alacritty/alacritty.yml -e {nvim,ranger,htop,spt -c ~/.config/bspwm/spotify-tui.yml}
+ctrl + alt + {v,r,h}
+	alacritty --config-file ~/.config/bspwm/alacritty/alacritty.yml -e {nvim,ranger,htop}
 
 # Color Picker
 super + p
@@ -57,24 +61,8 @@ ctrl + alt + l
 
 # Take a screenshot
 Print
-	takeshot --now
+	flameshot gui
 	
-# Take screenshot in 5 second
-alt + Print	
-	takeshot --in5
-
-# Take screenshot in 10 second
-shift + Print	
-	takeshot --in10
-
-# Take screenshot of active window
-ctrl + Print
-	takeshot --win
-
-# Take screenshot of area
-ctrl + alt + Print
-	takeshot --area
-
 # Brighness control
 XF86MonBrightness{Up,Down}
 	brightness{ --inc, --dec}

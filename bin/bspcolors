@@ -35,7 +35,7 @@ getcolors () {
 
 ## Write polybar colors file with current theme colors
 bspbar () {
-	cat > "$DIR"/polybar/colors <<- EOF	
+	cat > "$DIR"/polybar/colors.ini <<- EOF	
 	[color]
 
 	FOREGROUND = ${FOREGROUND}

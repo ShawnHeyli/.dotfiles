@@ -5,9 +5,9 @@
 
 ## Files and Directories
 DIR="$HOME/.config/bspwm/polybar"
-SFILE="$DIR/system"
-RFILE="$DIR/.system"
-MFILE="$DIR/.module"
+SFILE="$DIR/system.ini"
+RFILE="$DIR/.system.ini"
+MFILE="$DIR/.modules.ini"
 
 ## Get system variable values for various modules
 get_values() {
@@ -52,16 +52,16 @@ launch_bar() {
 	fi
 		
 	if [[ ! `pidof polybar` ]]; then
-		polybar -q main -c "$DIR"/config &
+		polybar -q main -c "$DIR"/config.ini &
 	else
 		polybar-msg cmd restart
 	fi
 }
 
 # Execute functions
-if [[ ! -f "$RFILE" ]]; then
-	get_values
-	set_values
-	touch ${RFILE}
-fi
+#if [[ ! -f "$RFILE" ]]; then
+#	get_values
+#	set_values
+#	touch ${RFILE}
+#fi
 launch_bar
