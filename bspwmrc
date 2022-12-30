@@ -186,6 +186,10 @@ redshift -l 48.117268:-1.677793 -r -P &
 # Set keyboard layout
 setxkbmap -layout us -variant intl
 
+# Disable screen sleep
+# Disable DPMS and prevent screen from blanking
+xset s off -dpms
+
 # Start bspwm scripts
 bspcolors
 bspbar
