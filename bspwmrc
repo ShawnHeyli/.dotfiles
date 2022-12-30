@@ -147,7 +147,7 @@ bspc rule -a '*:*:Picture in picture' state=floating sticky=on
 ## Autostart -------------------------------------------------#
 
 # Kill if already running
-killall -9 xsettingsd sxhkd dunst ksuperkey xfce4-power-manager blueman-applet
+killall -9 xsettingsd sxhkd dunst ksuperkey xfce4-power-manager blueman-applet udiskie
 
 # Launch xsettingsd daemon
 #xsettings -c ~/.config/bspwm/xsettingsd &
@@ -189,6 +189,9 @@ setxkbmap -layout us -variant intl
 # Disable screen sleep
 # Disable DPMS and prevent screen from blanking
 xset s off -dpms
+
+# Auto-mount USB
+udiskie -s
 
 # Start bspwm scripts
 bspcolors
